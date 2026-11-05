@@ -1,0 +1,1137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Student Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #7773d9;
+    --dark: #182342;
+    --muted: #7b849e;
+    --bg: #f6f7fc;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 12px;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 164px minmax(0, 1fr);
+    min-height: 100vh;
+    max-width: 1600px;
+    margin: auto;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    padding: 22px 16px;
+    background: #f8f8ff;
+    border-right: 1px solid #ebedf6;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 5px 30px;
+}
+
+.brand-mark {
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.nav {
+    display: grid;
+    gap: 7px;
+}
+
+.nav button {
+    border: none;
+    background: transparent;
+    color: #47516f;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 10px;
+    border-radius: 10px;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.nav button.active,
+.nav button:hover {
+    background: #e9e8ff;
+    color: #514eb1;
+}
+
+.nav .ico {
+    font-size: 16px;
+    width: 17px;
+}
+
+.tip {
+    margin-top: auto;
+    background: linear-gradient(140deg, #e7e8ff, #f1e8ff);
+    border-radius: 12px;
+    padding: 17px 12px;
+    color: #4b5272;
+    min-height: 150px;
+}
+
+.tip .spark {
+    font-size: 19px;
+    color: var(--primary);
+}
+
+.tip strong {
+    display: block;
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 9px 0;
+}
+
+.tip p {
+    line-height: 1.5;
+    color: #8a8fa7;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.avatar {
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e9bca5, #647b9c);
+    display: grid;
+    place-items: center;
+    color: white;
+}
+
+/* MAIN */
+
+main {
+    padding: 15px 14px 20px;
+    min-width: 0;
+}
+
+.topbar {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.search {
+    width: min(325px, 55%);
+    background: white;
+    border: 1px solid #eceef5;
+    border-radius: 10px;
+    padding: 9px 14px;
+    color: #98a0b4;
+}
+
+.top-actions {
+    display: flex;
+    gap: 15px;
+    font-size: 18px;
+    color: #6c7591;
+}
+
+/* DASHBOARD GRID */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1.65fr 1fr 1.12fr;
+    gap: 12px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #eceef5;
+    border-radius: 13px;
+    padding: 14px;
+    min-width: 0;
+    box-shadow: 0 2px 6px #202c5510;
+}
+
+/* HERO */
+
+.hero {
+    height: 220px;
+    color: white;
+    overflow: hidden;
+    position: relative;
+    padding: 19px;
+    background:
+        linear-gradient(100deg, #29466d80, #6e76b380),
+        url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #1e365c99, transparent 95%);
+}
+
+.hero > * {
+    position: relative;
+}
+
+.hero .date {
+    float: right;
+    font-size: 9px;
+    opacity: .8;
+}
+
+.hero h1 {
+    font-size: 24px;
+    margin: 6px 0 8px;
+}
+
+.hero p {
+    color: #e5e9f8;
+}
+
+.hero button {
+    margin-top: 54px;
+    border: none;
+    border-radius: 22px;
+    background: white;
+    color: #515b88;
+    padding: 9px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.hero button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px #0002;
+}
+
+/* WEATHER */
+
+.weather {
+    height: 220px;
+    background: linear-gradient(145deg, #a5c9fa, #e2e8ff);
+    position: relative;
+    overflow: hidden;
+}
+
+.weather:after {
+    content: "☁";
+    position: absolute;
+    right: -8px;
+    top: 7px;
+    font-size: 90px;
+    color: #fff8;
+}
+
+.weather .place {
+    font-weight: 600;
+    color: #4c5d8e;
+}
+
+.weather .temp {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 26px 0 6px;
+    font-size: 34px;
+    color: #334b7d;
+}
+
+.weather .sun {
+    font-size: 37px;
+}
+
+.weather p {
+    margin: 0 0 22px 47px;
+    color: #52638d;
+}
+
+.weather-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #4f638c;
+}
+
+/* STATISTICS */
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.stat {
+    padding: 13px;
+    border-radius: 12px;
+    min-height: 105px;
+}
+
+.stat .symbol {
+    font-size: 18px;
+}
+
+.stat label {
+    display: block;
+    margin: 9px 0 4px;
+    color: #59627d;
+    font-size: 10px;
+}
+
+.stat strong {
+    font-size: 17px;
+}
+
+.stat small {
+    display: block;
+    margin-top: 5px;
+    font-size: 9px;
+    color: #6e9e86;
+}
+
+.lav { background: #f0efff; }
+.mint { background: #e9f8f3; }
+.peach { background: #fff0ed; }
+.cream { background: #fff8e6; }
+
+/* TITLES */
+
+.wide-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.wide-title small {
+    font-weight: 500;
+    color: #78819b;
+    font-size: 10px;
+}
+
+/* WEEKLY CHART */
+
+.progress {
+    min-height: 212px;
+}
+
+.chart {
+    width: 100%;
+    height: 150px;
+}
+
+.chart svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.gridline {
+    stroke: #e9ebf4;
+    stroke-width: 1;
+}
+
+.chart-label {
+    fill: #78819b;
+    font-size: 9px;
+}
+
+/* OVERALL PROGRESS */
+
+.overall {
+    min-height: 212px;
+    text-align: center;
+}
+
+.ring {
+    width: 130px;
+    height: 130px;
+    margin: 13px auto 8px;
+    position: relative;
+}
+
+.ring svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.ring circle {
+    fill: none;
+    stroke-width: 10;
+}
+
+.ring .track {
+    stroke: #eeeefe;
+}
+
+.ring .value {
+    stroke: #43c1b6;
+    stroke-dasharray: 195 270;
+    stroke-linecap: round;
+}
+
+.ringtext {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+}
+
+.ringtext strong {
+    font-size: 22px;
+}
+
+.ringtext span {
+    font-size: 10px;
+    color: #8991a8;
+}
+
+.overall p {
+    font-size: 10px;
+    color: #8a92a9;
+    line-height: 1.5;
+}
+
+/* ACTIVITIES */
+
+.activities {
+    min-height: 212px;
+}
+
+.activity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 13px 0;
+}
+
+.activity .badge {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    background: #dff6ee;
+    color: #2eae8b;
+}
+
+.activity strong {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.activity small {
+    display: block;
+    color: #8991a8;
+    font-size: 9px;
+    margin-top: 3px;
+}
+
+/* TASKS */
+
+.tasks {
+    min-height: 178px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 14px 0;
+    color: #67718c;
+    font-size: 10px;
+}
+
+.task input {
+    accent-color: var(--primary);
+}
+
+.task time {
+    margin-left: auto;
+    color: #8b93a9;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.task.done span {
+    text-decoration: line-through;
+    color: #9ba2b5;
+}
+
+/* SKILLS */
+
+.skills {
+    min-height: 178px;
+}
+
+.skill {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 8px;
+    align-items: center;
+    margin: 13px 0;
+}
+
+.skill-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    background: #f16b4d;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+}
+
+.skill-name {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.bar {
+    height: 5px;
+    border-radius: 5px;
+    background: #edf0f7;
+    overflow: hidden;
+}
+
+.bar i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #7773d9, #589de7);
+    border-radius: 5px;
+}
+
+/* SCHEDULE */
+
+.schedule {
+    min-height: 178px;
+}
+
+.event {
+    display: flex;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.event-date {
+    width: 29px;
+    height: 32px;
+    background: #f0f1ff;
+    border-radius: 6px;
+    text-align: center;
+    padding-top: 4px;
+    color: #6874b5;
+    font-size: 9px;
+}
+
+.event-date b {
+    display: block;
+    font-size: 13px;
+}
+
+.event strong {
+    font-size: 10px;
+    display: block;
+}
+
+.event small {
+    font-size: 9px;
+    color: #8a92a8;
+    display: block;
+    margin-top: 4px;
+}
+
+/* QUOTE */
+
+.quote {
+    min-height: 178px;
+    background: linear-gradient(150deg, #f2edff, #e5e8ff);
+    position: relative;
+    overflow: hidden;
+}
+
+.quote:after {
+    content: "🌿";
+    position: absolute;
+    right: 6px;
+    bottom: 0;
+    font-size: 50px;
+    opacity: .6;
+}
+
+.quote blockquote {
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 20px 0 8px;
+}
+
+.quote small {
+    color: #858ca6;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px) {
+    .app {
+        grid-template-columns: 135px 1fr;
+    }
+
+    .dashboard {
+        grid-template-columns: 1.4fr 1fr;
+    }
+
+    .stats {
+        grid-column: span 2;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media(max-width:760px) {
+    .app {
+        display: block;
+    }
+
+    .sidebar {
+        padding: 12px;
+        display: block;
+        border: 0;
+    }
+
+    .brand {
+        margin: 0 0 10px;
+    }
+
+    .nav {
+        display: flex;
+        overflow: auto;
+    }
+
+    .nav button {
+        white-space: nowrap;
+        padding: 9px;
+    }
+
+    .tip,
+    .profile {
+        display: none;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero,
+    .weather,
+    .stats {
+        grid-column: span 2;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .progress,
+    .overall,
+    .activities,
+    .tasks,
+    .skills,
+    .schedule,
+    .quote {
+        grid-column: span 2;
+    }
+}
+
+@media(max-width:430px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .hero,
+    .weather,
+    .stats,
+    .progress,
+    .overall,
+    .activities,
+    .tasks,
+    .skills,
+    .schedule,
+    .quote {
+        grid-column: span 1;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar">
+
+<div class="brand">
+    <span class="brand-mark">✿</span> Nova
+</div>
+
+<nav class="nav">
+    <button class="active"><span class="ico">⌂</span>Dashboard</button>
+    <button><span class="ico">▥</span>Analytics</button>
+    <button><span class="ico">▱</span>Messages</button>
+    <button><span class="ico">▣</span>Calendar</button>
+    <button><span class="ico">☑</span>Tasks</button>
+    <button><span class="ico">⚙</span>Settings</button>
+</nav>
+
+<div class="tip">
+    <span class="spark">✦</span>
+    <strong>Better Things Ahead</strong>
+    <p>Stay consistent,<br>stay powerful.</p>
+</div>
+
+<div class="profile">
+    <div class="avatar">👩🏻</div>
+    <span>Tesnim Abdella</span>
+    <span>⌄</span>
+</div>
+
+</aside>
+
+<main>
+
+<div class="topbar">
+    <div class="search">⌕ &nbsp; Search anything...</div>
+    <div class="top-actions">
+        <span>♧</span>
+        <span>☼</span>
+    </div>
+</div>
+
+<section class="dashboard">
+
+<!-- WELCOME CARD -->
+
+<div class="panel hero">
+    <span class="date">Mon, 8 Sep 2026</span>
+    <div>Good Morning,</div>
+    <h1>Tesnim <span style="color:#bfc7ff">✦</span></h1>
+    <p>Keep going! You're doing great.</p>
+    <button onclick="alert('Your goals are ready to review!')">
+        View Goals →
+    </button>
+</div>
+
+<!-- WEATHER -->
+
+<div class="panel weather">
+    <div class="place">⌖ &nbsp; Addis Ababa</div>
+
+    <div class="temp">
+        <span class="sun">☀️</span>22°C
+    </div>
+
+    <p>Partly cloudy</p>
+
+    <div class="weather-bottom">
+        <span>💧 Humidity<br><b>62%</b></span>
+        <span>♨ Wind<br><b>12 km/h</b></span>
+        <span>🌱 Air Quality<br><b>Good</b></span>
+    </div>
+</div>
+
+<!-- STATISTICS -->
+
+<div class="stats">
+
+    <div class="stat lav">
+        <span class="symbol">🎓</span>
+        <label>Total Courses</label>
+        <strong>6</strong>
+        <small>↑ 2 this week</small>
+    </div>
+
+    <div class="stat mint">
+        <span class="symbol">🟢</span>
+        <label>Completed Tasks</label>
+        <strong>8</strong>
+        <small>↑ 3 this week</small>
+    </div>
+
+    <div class="stat peach">
+        <span class="symbol">🔥</span>
+        <label>Study Streak</label>
+        <strong>12 days</strong>
+        <small>♨ Keep it up!</small>
+    </div>
+
+    <div class="stat cream">
+        <span class="symbol">⭐</span>
+        <label>Achievements</label>
+        <strong>5</strong>
+        <small>↑ 1 new</small>
+    </div>
+
+</div>
+
+<!-- WEEKLY PROGRESS -->
+
+<div class="panel progress">
+
+    <div class="wide-title">
+        〽 Weekly Progress
+        <small>This Week⌄</small>
+    </div>
+
+    <div class="chart">
+
+    <svg viewBox="0 0 350 150" preserveAspectRatio="none">
+
+        <g>
+            <path class="gridline"
+            d="M25 20H340 M25 50H340 M25 80H340 M25 110H340 M25 140H340"/>
+
+            <text class="chart-label" x="0" y="23">100</text>
+            <text class="chart-label" x="5" y="53">75</text>
+            <text class="chart-label" x="5" y="83">50</text>
+            <text class="chart-label" x="5" y="113">25</text>
+            <text class="chart-label" x="12" y="143">0</text>
+
+            <path
+            d="M30 105 C55 92 65 78 85 85
+            S120 92 140 78 S170 35 190 45
+            S220 65 245 68 S280 60 305 45
+            S325 35 340 30 L340 140 L30 140Z"
+            fill="#7773d922"/>
+
+            <path
+            d="M30 105 C55 92 65 78 85 85
+            S120 92 140 78 S170 35 190 45
+            S220 65 245 68 S280 60 305 45
+            S325 35 340 30"
+            fill="none"
+            stroke="#7773d9"
+            stroke-width="2"/>
+
+            <g fill="#7773d9">
+                <circle cx="30" cy="105" r="3"/>
+                <circle cx="85" cy="85" r="3"/>
+                <circle cx="140" cy="78" r="3"/>
+                <circle cx="190" cy="45" r="4"/>
+                <circle cx="245" cy="68" r="3"/>
+                <circle cx="290" cy="60" r="3"/>
+                <circle cx="340" cy="30" r="3"/>
+            </g>
+
+            <rect x="175" y="13" width="34" height="19"
+            rx="5" fill="#17284d"/>
+
+            <text x="192" y="26" fill="white"
+            text-anchor="middle" font-size="9">78%</text>
+
+            <text class="chart-label" x="22" y="150">Mon</text>
+            <text class="chart-label" x="74" y="150">Tue</text>
+            <text class="chart-label" x="127" y="150">Wed</text>
+            <text class="chart-label" x="182" y="150">Thu</text>
+            <text class="chart-label" x="237" y="150">Fri</text>
+            <text class="chart-label" x="286" y="150">Sat</text>
+            <text class="chart-label" x="330" y="150">Sun</text>
+        </g>
+
+    </svg>
+    </div>
+</div>
+
+<!-- OVERALL PROGRESS -->
+
+<div class="panel overall">
+
+    <div class="wide-title">◎ Overall Progress</div>
+
+    <div class="ring">
+
+        <svg viewBox="0 0 100 100">
+            <circle class="track" cx="50" cy="50" r="43"/>
+            <circle class="value" cx="50" cy="50" r="43"/>
+        </svg>
+
+        <div class="ringtext">
+            <strong>72%</strong>
+            <span>Completed</span>
+        </div>
+
+    </div>
+
+    <p>You're closer to your goals<br>than you think!</p>
+
+</div>
+
+<!-- RECENT ACTIVITIES -->
+
+<div class="panel activities">
+
+    <div class="wide-title">
+        ◷ Recent Activities
+        <small>View all →</small>
+    </div>
+
+    <div class="activity">
+        <span class="badge">✓</span>
+        <div>
+            <strong>Completed “JavaScript Basics”</strong>
+            <small>2 hours ago</small>
+        </div>
+    </div>
+
+    <div class="activity">
+        <span class="badge">▤</span>
+        <div>
+            <strong>Submitted assignment</strong>
+            <small>4 hours ago</small>
+        </div>
+    </div>
+
+    <div class="activity">
+        <span class="badge">＋</span>
+        <div>
+            <strong>Joined a new course</strong>
+            <small>6 hours ago</small>
+        </div>
+    </div>
+
+    <div class="activity">
+        <span class="badge">▰</span>
+        <div>
+            <strong>Messaged your mentor</strong>
+            <small>8 hours ago</small>
+        </div>
+    </div>
+
+</div>
+
+<!-- TASKS -->
+
+<div class="panel tasks">
+
+    <div class="wide-title">
+        ☑ Tasks
+        <small>View all →</small>
+    </div>
+
+    <label class="task done">
+        <input type="checkbox" checked>
+        <span>Finish JavaScript assignment</span>
+        <time>Today</time>
+    </label>
+
+    <label class="task done">
+        <input type="checkbox" checked>
+        <span>Read chapter 4 (Python)</span>
+        <time>Today</time>
+    </label>
+
+    <label class="task">
+        <input type="checkbox">
+        <span>Build portfolio section</span>
+        <time>Tomorrow</time>
+    </label>
+
+    <label class="task">
+        <input type="checkbox">
+        <span>Join CPD contest</span>
+        <time>Sept 12</time>
+    </label>
+
+</div>
+
+<!-- TOP SKILLS -->
+
+<div class="panel skills">
+
+    <div class="wide-title">
+        ♧ Top Skills
+        <small>View all →</small>
+    </div>
+
+    <div class="skill">
+        <span class="skill-icon">5</span>
+        <div>
+            <div class="skill-name">
+                <b>HTML</b><span>90%</span>
+            </div>
+            <div class="bar"><i style="width:90%"></i></div>
+        </div>
+    </div>
+
+    <div class="skill">
+        <span class="skill-icon">▤</span>
+        <div>
+            <div class="skill-name">
+                <b>CSS</b><span>85%</span>
+            </div>
+            <div class="bar"><i style="width:85%"></i></div>
+        </div>
+    </div>
+
+    <div class="skill">
+        <span class="skill-icon">JS</span>
+        <div>
+            <div class="skill-name">
+                <b>JavaScript</b><span>75%</span>
+            </div>
+            <div class="bar">
+                <i style="width:75%;background:#d8c943"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="skill">
+        <span class="skill-icon">⚛</span>
+        <div>
+            <div class="skill-name">
+                <b>React</b><span>60%</span>
+            </div>
+            <div class="bar"><i style="width:60%"></i></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- UPCOMING SCHEDULE -->
+
+<div class="panel schedule">
+
+    <div class="wide-title">▣ Upcoming Schedule</div>
+
+    <div class="event">
+        <div class="event-date"><b>8</b>Sep</div>
+        <div>
+            <strong>Web Development Class</strong>
+            <small>8:00 AM – 11:00 AM</small>
+        </div>
+    </div>
+
+    <div class="event">
+        <div class="event-date"><b>8</b>Sep</div>
+        <div>
+            <strong>DSA Practice</strong>
+            <small>2:00 PM – 5:00 PM</small>
+        </div>
+    </div>
+
+    <div class="event">
+        <div class="event-date"><b>10</b>Sep</div>
+        <div>
+            <strong>CPD Entrance Contest</strong>
+            <small>10:00 AM – 12:00 PM</small>
+        </div>
+    </div>
+
+    <small style="color:#7781a0">View calendar →</small>
+
+</div>
+
+<!-- QUOTE -->
+
+<div class="panel quote">
+
+    <div class="wide-title">♧ Quote</div>
+
+    <blockquote>
+        “Small steps every day<br>
+        lead to big results.”
+    </blockquote>
+
+    <small>— Unknown</small>
+
+</div>
+
+</section>
+</main>
+</div>
+
+<script>
+
+// Sidebar active navigation
+document.querySelectorAll('.nav button').forEach(button => {
+
+    button.addEventListener('click', () => {
+
+        document.querySelectorAll('.nav button')
+        .forEach(item => item.classList.remove('active'));
+
+        button.classList.add('active');
+
+    });
+
+});
+
+// Interactive task checkboxes
+document.querySelectorAll('.task input').forEach(input => {
+
+    input.addEventListener('change', () => {
+
+        input.closest('.task')
+        .classList.toggle('done', input.checked);
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
